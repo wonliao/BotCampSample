@@ -46,14 +46,14 @@ namespace BotCampDemo
 						if (fbData.postback.payload.StartsWith("Face>"))
 						{
 							//faceAPI
-							FaceServiceClient client = new FaceServiceClient("");
+							FaceServiceClient client = new FaceServiceClient("01938386d18549e6bc1575b036d6d169");
 							var result = await client.DetectAsync(url, true, false, new FaceAttributeType[] { FaceAttributeType.Age, FaceAttributeType.Gender });
 							reply.Text = $"male:{result.Count(x => x.FaceAttributes.Gender == "male")},female:{result.Count(x => x.FaceAttributes.Gender == "female")}";
 						}
 						else if (fbData.postback.payload.StartsWith("Analyze>"))
 						{
 							//辨識圖片
-							VisionServiceClient client = new VisionServiceClient("");
+							VisionServiceClient client = new VisionServiceClient("5092ac9edbb1474ebc4c209d551036ce");
 							var result = await client.AnalyzeImageAsync(url, new VisualFeature[] { VisualFeature.Description });
 							reply.Text = result.Description.Captions.First().Text;
 						}
