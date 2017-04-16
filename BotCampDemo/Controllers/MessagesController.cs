@@ -53,7 +53,7 @@ namespace BotCampDemo
 							foreach (var face in result)
 							{
 								
-								reply.Text += face.FaceAttributes.Gender + "(" + face.FaceAttributes.Age + ") ";
+								reply.Text += face.FaceAttributes.Gender + "（" + face.FaceAttributes.Age + "） ";
 
 							}
 
