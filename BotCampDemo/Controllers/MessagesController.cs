@@ -48,7 +48,15 @@ namespace BotCampDemo
 							//faceAPI
 							FaceServiceClient client = new FaceServiceClient("01938386d18549e6bc1575b036d6d169");
 							var result = await client.DetectAsync(url, true, false, new FaceAttributeType[] { FaceAttributeType.Age, FaceAttributeType.Gender });
-							reply.Text = $"male:{result.Count(x => x.FaceAttributes.Gender == "male")},female:{result.Count(x => x.FaceAttributes.Gender == "female")}";
+							//reply.Text = $"male:{result.Count(x => x.FaceAttributes.Gender == "male")},female:{result.Count(x => x.FaceAttributes.Gender == "female")}";
+
+							foreach (var face in result)
+							{
+								
+								reply.Text += face.FaceAttributes.Gender + "(" + face.FaceAttributes.Age + ") ";
+
+							}
+
 						}
 						else if (fbData.postback.payload.StartsWith("Analyze>"))
 						{
