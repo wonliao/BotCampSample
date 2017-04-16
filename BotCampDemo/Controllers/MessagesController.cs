@@ -28,7 +28,7 @@ namespace BotCampDemo
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
-				//Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
+				Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
 				ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 				Activity reply = activity.CreateReply();
 				//reply.Text = "看不懂";
