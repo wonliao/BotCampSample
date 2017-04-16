@@ -31,7 +31,8 @@ namespace BotCampDemo
 				//Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
 				ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 				Activity reply = activity.CreateReply();
-
+				reply.Text = "看不懂";
+				/*
 				if (activity.Attachments?.Count > 0 && activity.Attachments.First().ContentType.StartsWith("image"))
 				{
 					ImageTemplate(reply, activity.Attachments.First().ContentUrl);
@@ -75,6 +76,7 @@ namespace BotCampDemo
 						}
 					}
 				}
+				*/
 				
 				await connector.Conversations.ReplyToActivityAsync(reply);
 			}
