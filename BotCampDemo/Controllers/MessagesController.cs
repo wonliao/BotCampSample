@@ -60,7 +60,7 @@ namespace BotCampDemo
 					}
 					else
 					{
-						using (LuisClient client = new LuisClient("appid", "key"))
+						using (LuisClient client = new LuisClient("1a5eff99-4dbd-4b86-8c2c-2c7b314493ca", "f9a1366042a3474eaa9c4c3ddd882dd2"))
 						{
 							var result = await client.Predict(activity.Text);
 							if (result.Intents.Count() <= 0 || result.TopScoringIntent.Name != "查匯率")
