@@ -71,19 +71,23 @@ namespace BotCampDemo
 						using (LuisClient client = new LuisClient("1a5eff99-4dbd-4b86-8c2c-2c7b314493ca", "f9a1366042a3474eaa9c4c3ddd882dd2"))
 						{
 							var result = await client.Predict(activity.Text);
-							if (result.Intents.Count() > 0 && result.TopScoringIntent.Name == "查匯率")
+                            if (result.Intents.Count() > 0) 
 							{
-								var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
-								// ask api
-								reply.Text = $"{currency}價格是30.0";
-							}
-							else if (result.Intents.Count() > 0 && result.TopScoringIntent.Name == "叫車")
-							{
-								reply.Text = "請問你的上車地點?";
+                                if(result.TopScoringIntent.Name == "查匯率")
+                                {
+									var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
+									// ask api
+									reply.Text = $"{currency}價格是30.0";
+                                }
+                                else if (result.TopScoringIntent.Name == "叫車")
+                                {
+                                    reply.Text = "請問你的上車地點?";
+                                }
 							}
 							else
 							{
-								reply.Text = "看不懂";
+                                //reply.Text = "看不懂";
+                                TemplateByChannelData(reply);
 							}
 						}
 					}
