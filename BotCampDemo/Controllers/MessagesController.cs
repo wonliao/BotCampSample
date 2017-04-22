@@ -168,17 +168,17 @@ namespace BotCampDemo
 					{
 						template_type = "airline_checkin",
 						intro_message = "Check-in is available now.",
+                        locale = "zh_TW",
                         theme_color = "#FFC500",
-						locale =  "zh_TW",
-						pnr_number = "AA-1234",
+						pnr_number = "55688 台灣大車隊",
 						flight_info = new List<object>()
 						{
                             new
                             {
-								flight_number = "f001",
+								flight_number = "AA-1234",
 								departure_airport = new
 								{
-									airport_code = "住家",
+									airport_code = "家裡",
 									city = "三重市永福街",
 									terminal = "T4",
 									gate = "G8"
