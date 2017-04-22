@@ -170,30 +170,41 @@ namespace BotCampDemo
 						intro_message = "Check-in is available now.",
 						locale =  "en_US",
 						pnr_number = "ABCDEF",
-						flight_info = new
+						flight_info = new List<object>()
 						{
-							flight_number = "f001",
-							departure_airport = new 
+                            new
                             {
-								airport_code = "SFO",
-				                city = "San Francisco",
-				                terminal = "T4",
-				                gate = "G8"
-							},
-							arrival_airport = new
-							{
-								airport_code = "SEA",
-								city = "Seattle",
-								terminal = "T4",
-								gate = "G8"
-							},
-							flight_schedule = new
-							{
-								boarding_time = "2016-01-05T15:05",
-								departure_time = "2016-01-05T15:45",
-								arrival_time = "2016-01-05T17:30"
-							},
-						}
+								flight_number = "f001",
+								departure_airport = new
+								{
+									airport_code = "SFO",
+									city = "San Francisco",
+									terminal = "T4",
+									gate = "G8"
+								}
+                            },
+                            new
+                            {
+								arrival_airport = new
+								{
+									airport_code = "SEA",
+									city = "Seattle",
+									terminal = "T4",
+									gate = "G8"
+								}
+                            },
+                            new
+                            {
+								flight_schedule = new
+								{
+									boarding_time = "2016-01-05T15:05",
+									departure_time = "2016-01-05T15:45",
+									arrival_time = "2016-01-05T17:30"
+								}
+                            }
+							
+						},
+                        checkin_url = "https://www.airline.com/check-in"
 					}
 				}
 			});
