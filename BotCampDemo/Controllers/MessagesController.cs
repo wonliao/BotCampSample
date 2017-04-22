@@ -85,15 +85,13 @@ namespace BotCampDemo
                                 } 
                                 else 
                                 {
-
-
-                                    reply.Text = "看不懂2";
-                                }
+                                    TemplateByChannelData(reply);
+								}
 							}
 							else
 							{
 								reply.Text = "看不懂";
-								//TemplateByChannelData(reply);
+								
 							}
 						}
 					}
