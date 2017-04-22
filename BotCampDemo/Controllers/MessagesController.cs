@@ -168,8 +168,8 @@ namespace BotCampDemo
 					{
 						template_type = "airline_checkin",
 						intro_message = "Check-in is available now.",
-						locale =  "en_US",
-						pnr_number = "ABCDEF",
+						locale =  "zh_TW",
+						pnr_number = "AA-1234",
 						flight_info = new List<object>()
 						{
                             new
