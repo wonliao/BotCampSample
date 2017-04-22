@@ -181,20 +181,14 @@ namespace BotCampDemo
 									city = "San Francisco",
 									terminal = "T4",
 									gate = "G8"
-								}
-                            },
-                            new
-                            {
+								},
 								arrival_airport = new
 								{
 									airport_code = "SEA",
 									city = "Seattle",
 									terminal = "T4",
 									gate = "G8"
-								}
-                            },
-                            new
-                            {
+								},
 								flight_schedule = new
 								{
 									boarding_time = "2016-01-05T15:05",
@@ -202,7 +196,6 @@ namespace BotCampDemo
 									arrival_time = "2016-01-05T17:30"
 								}
                             }
-							
 						},
                         checkin_url = "https://www.airline.com/check-in"
 					}
