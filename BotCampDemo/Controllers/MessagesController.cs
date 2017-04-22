@@ -169,7 +169,7 @@ namespace BotCampDemo
 						template_type = "airline_checkin",
 						intro_message = "你最近的一筆預約",
 						locale =  "zh_TW",
-						pnr_number = "車輛編號：AA-1234",
+						pnr_number = "AA-1234",
 						//theme_color = "#FFFF00",
 						flight_info = new List<object>()
 						{
