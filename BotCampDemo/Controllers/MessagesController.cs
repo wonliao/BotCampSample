@@ -85,7 +85,8 @@ namespace BotCampDemo
                                 } 
                                 else 
                                 {
-                                    TemplateByChannelData(reply);
+                                    //TemplateByChannelData(reply);
+                                    TemplateByAirlineCheckin(reply);
 								}
 							}
 							else
@@ -150,6 +151,48 @@ namespace BotCampDemo
 									}
 								}
 							}
+						}
+					}
+				}
+			});
+		}
+
+		private void TemplateByAirlineCheckin(Activity reply)
+		{
+			reply.ChannelData = JObject.FromObject(new
+			{
+				attachment = new
+				{
+					type = "template",
+					payload = new
+					{
+						template_type = "airline_checkin",
+						intro_message = "Check-in is available now.",
+						locale =  "en_US",
+						pnr_number = "ABCDEF",
+						flight_info = new
+						{
+							flight_number = "f001",
+							departure_airport = new 
+                            {
+								airport_code = "SFO",
+				                city = "San Francisco",
+				                terminal = "T4",
+				                gate = "G8"
+							},
+							arrival_airport = new
+							{
+								airport_code = "SEA",
+								city = "Seattle",
+								terminal = "T4",
+								gate = "G8"
+							},
+							flight_schedule = new
+							{
+								boarding_time = "2016-01-05T15:05",
+								departure_time = "2016-01-05T15:45",
+								arrival_time = "2016-01-05T17:30"
+							},
 						}
 					}
 				}
