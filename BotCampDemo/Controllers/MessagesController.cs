@@ -167,15 +167,15 @@ namespace BotCampDemo
 					payload = new
 					{
 						template_type = "airline_checkin",
-						intro_message = "你最近的一筆預約",
+						intro_message = "Check-in is available now.",
+                        theme_color = "#FFFF00",
 						locale =  "zh_TW",
 						pnr_number = "AA-1234",
-						//theme_color = "#FFFF00",
 						flight_info = new List<object>()
 						{
                             new
                             {
-								flight_number = "",
+								flight_number = "f001",
 								departure_airport = new
 								{
 									airport_code = "住家",
@@ -192,9 +192,9 @@ namespace BotCampDemo
 								},
 								flight_schedule = new
 								{
-									boarding_time = "2016-01-05T13:50",
-									departure_time = "2016-01-05T13:50",
-									arrival_time = "2016-01-05T13:55"
+									boarding_time = "2016-01-05T15:05",
+									departure_time = "2016-01-05T15:45",
+									arrival_time = "2016-01-05T17:30"
 								}
                             }
 						},
