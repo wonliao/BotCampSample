@@ -28,9 +28,10 @@ namespace BotCampDemo
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
-				//Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
+				Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
 				ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 				Activity reply = activity.CreateReply();
+				//reply.Text = "看不懂";
 
 				if (activity.Attachments?.Count > 0 && activity.Attachments.First().ContentType.StartsWith("image"))
 				{
@@ -45,37 +46,54 @@ namespace BotCampDemo
 						if (fbData.postback.payload.StartsWith("Face>"))
 						{
 							//faceAPI
-							FaceServiceClient client = new FaceServiceClient("");
+							FaceServiceClient client = new FaceServiceClient("01938386d18549e6bc1575b036d6d169");
 							var result = await client.DetectAsync(url, true, false, new FaceAttributeType[] { FaceAttributeType.Age, FaceAttributeType.Gender });
-							reply.Text = $"male:{result.Count(x => x.FaceAttributes.Gender == "male")},female:{result.Count(x => x.FaceAttributes.Gender == "female")}";
+							//reply.Text = $"male:{result.Count(x => x.FaceAttributes.Gender == "male")},female:{result.Count(x => x.FaceAttributes.Gender == "female")}";
+
+							foreach (var face in result)
+							{
+
+								reply.Text += face.FaceAttributes.Gender + "（" + face.FaceAttributes.Age + "） ";
+
+							}
+
 						}
 						else if (fbData.postback.payload.StartsWith("Analyze>"))
 						{
 							//辨識圖片
-							VisionServiceClient client = new VisionServiceClient("");
+							VisionServiceClient client = new VisionServiceClient("5092ac9edbb1474ebc4c209d551036ce");
 							var result = await client.AnalyzeImageAsync(url, new VisualFeature[] { VisualFeature.Description });
 							reply.Text = result.Description.Captions.First().Text;
 						}
 					}
 					else
 					{
-						using (LuisClient client = new LuisClient("appid", "key"))
+						using (LuisClient client = new LuisClient("1a5eff99-4dbd-4b86-8c2c-2c7b314493ca", "f9a1366042a3474eaa9c4c3ddd882dd2"))
 						{
 							var result = await client.Predict(activity.Text);
-							if (result.Intents.Count() <= 0 || result.TopScoringIntent.Name != "查匯率")
+							if (result.Intents.Count() > 0)
 							{
-								reply.Text = "看不懂";
+								if (result.TopScoringIntent.Name == "查匯率")
+								{
+									var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
+									// ask api
+									reply.Text = $"{currency}價格是30.0";
+								}
+								else if (result.TopScoringIntent.Name == "叫車")
+								{
+									reply.Text = "請問你的上車地點?";
+								}
 							}
 							else
 							{
-								var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
-								// ask api
-								reply.Text = $"{currency}價格是30.0";
+								reply.Text = "看不懂1";
+								//TemplateByChannelData(reply);
 							}
 						}
 					}
 				}
-				
+
+
 				await connector.Conversations.ReplyToActivityAsync(reply);
 			}
 			else
@@ -173,7 +191,7 @@ namespace BotCampDemo
 					new CardAction(ActionTypes.PostBack, "辨識圖片", value: $"Analyze>{url}")
 				}
 			}.ToAttachment());
-			
+
 			reply.Attachments = att;
 		}
 
