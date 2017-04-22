@@ -177,15 +177,15 @@ namespace BotCampDemo
 								flight_number = "f001",
 								departure_airport = new
 								{
-									airport_code = "SFO",
-									city = "San Francisco",
+									airport_code = "住家",
+									city = "三重市永福街",
 									terminal = "T4",
 									gate = "G8"
 								},
 								arrival_airport = new
 								{
-									airport_code = "SEA",
-									city = "Seattle",
+									airport_code = "公司",
+									city = "台北市長安東路",
 									terminal = "T4",
 									gate = "G8"
 								},
