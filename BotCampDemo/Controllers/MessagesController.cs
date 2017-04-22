@@ -82,11 +82,17 @@ namespace BotCampDemo
 								else if (result.TopScoringIntent.Name == "叫車")
 								{
 									reply.Text = "請問你的上車地點?";
-								}
+                                } 
+                                else 
+                                {
+
+
+                                    reply.Text = "看不懂2";
+                                }
 							}
 							else
 							{
-								reply.Text = "看不懂1";
+								reply.Text = "看不懂";
 								//TemplateByChannelData(reply);
 							}
 						}
