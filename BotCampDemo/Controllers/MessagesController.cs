@@ -222,7 +222,9 @@ namespace BotCampDemo
 								title = "Select Criteria",
 								webview_height_ratio = "tall",
 								messenger_extensions = true,
-								fallback_url = "https://go2gether-e78d4.firebaseapp.com/"
+								fallback_url = "https://go2gether-e78d4.firebaseapp.com"
+
+
 							}
 						}
 					}
