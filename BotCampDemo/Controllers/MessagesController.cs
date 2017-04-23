@@ -76,10 +76,15 @@ namespace BotCampDemo
 									// ask api
 									reply.Text = $"{currency}價格是30.0";
 								}
-								else if (result.TopScoringIntent.Name == "叫車")
+								else if (result.TopScoringIntent.Name == "找車")
 								{
 									reply.Text = "請問你的上車地點?";
-                                } 
+                                }
+								else if (result.TopScoringIntent.Name == "找地點")
+								{
+                                    var address = result.Entities.First().Value[0].Value;
+									reply.Text = $"你的上車地點是{address}";
+								}
                                 else 
                                 {
                                     //TemplateByChannelData(reply);
