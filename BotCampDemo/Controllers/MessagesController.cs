@@ -70,7 +70,7 @@ namespace BotCampDemo
 							var result = await client.Predict(activity.Text);
 							if (result.Intents.Count() > 0)
 							{
-                                if (result.TopScoringIntent.Name == "叫車") {
+                                if (result.TopScoringIntent.Name == "找車") {
 
                                     var _str = result.TopScoringIntent.Name;
                                     reply.Text = $"won test 1 ==> {_str}";
