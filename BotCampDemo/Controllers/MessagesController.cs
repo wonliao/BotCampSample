@@ -211,12 +211,26 @@ namespace BotCampDemo
 					type = "template",
 					payload = new
 					{
-						template_type = "web_url",
-						url = "https://zh.wikipedia.org/wiki/Wiki",
-						title = "Select Criteria",
-						webview_height_ratio = "full",
-						messenger_extensions = true,
-						fallback_url = "https://petersfancyapparel.com/fallback"
+						template_type = "button",
+                        text = "What do you want to do next?",
+						buttons = new List<object>()
+                        {
+                            new
+                            {
+                                title = "iPad Pro",
+                                image_url = "https://s.yimg.com/wb/images/936392DB6B69D9C6D1B897B8DAB20AE595E96FA4",
+                                buttons = new List<object>()
+                                {
+                                    new
+                                    {
+										type = "web_url",
+										url = "https://zh.wikipedia.org/wiki/Wiki",
+										title = "Show Website"
+                                    }
+                                }
+                            }
+                        }
+               
 					}
 				}
 			});
