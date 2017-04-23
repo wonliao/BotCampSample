@@ -70,6 +70,19 @@ namespace BotCampDemo
 							var result = await client.Predict(activity.Text);
 							if (result.Intents.Count() > 0)
 							{
+                                if (result.TopScoringIntent.Name == "叫車") {
+
+                                    var _str = result.TopScoringIntent.Name;
+                                    reply.Text = $"won test 1 ==> {_str}";
+
+
+                                } else {
+                                 
+                                    reply.Text = "won test 2";
+                                }
+
+
+                                /*
 								if (result.TopScoringIntent.Name == "查匯率")
 								{
 									var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
@@ -91,6 +104,7 @@ namespace BotCampDemo
                                     //TemplateByAirlineCheckin(reply);
                                     TemplateByWebURL(reply);
 								}
+								*/
 							}
 							else
 							{
@@ -223,8 +237,8 @@ namespace BotCampDemo
 							new
 							{
 								type = "web_url",
-								url = "https://go2gether-e78d4.firebaseapp.com",
-								title = "打開網頁",
+								url = "http://52.197.124.196/luis/?car_type=1&address=新北市三重區永福街135巷25號",
+								title = "開始訂車",
 								webview_height_ratio = "compact"
 							}
 						}
