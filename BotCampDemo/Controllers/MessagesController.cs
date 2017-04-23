@@ -212,21 +212,19 @@ namespace BotCampDemo
 					payload = new
 					{
 						template_type = "button",
-                        text = "What do you want to do next?",
+						text = "What do you want to do next?",
 						buttons = new List<object>()
-                        {
-                            new
-                            {
-								template_type = "web_url",
+						{
+							new
+							{
+								type = "web_url",
 								url = "https://zh.wikipedia.org/wiki/Wiki",
 								title = "Select Criteria",
-								webview_height_ratio = "full",
-								messenger_extensions = true,
-								fallback_url = "https://petersfancyapparel.com/fallback"
-                            }
-                        }
-
-
+								//webview_height_ratio = "full",
+								//messenger_extensions = true,
+								//fallback_url = "https://petersfancyapparel.com/fallback"
+							}
+						}
 					}
 				}
 			});
