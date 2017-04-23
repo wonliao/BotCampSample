@@ -82,9 +82,9 @@ namespace BotCampDemo
                                 } 
                                 else 
                                 {
-									//TemplateByChannelData(reply);
-									TemplateByAirlineCheckin(reply);
-
+                                    //TemplateByChannelData(reply);
+                                    //TemplateByAirlineCheckin(reply);
+                                    TemplateByWebURL(reply);
 								}
 							}
 							else
@@ -197,6 +197,26 @@ namespace BotCampDemo
                             }
 						},
                         checkin_url = "https://www.airline.com/check-in"
+					}
+				}
+			});
+		}
+
+		private void TemplateByWebURL(Activity reply)
+		{
+			reply.ChannelData = JObject.FromObject(new
+			{
+				attachment = new
+				{
+					type = "template",
+					payload = new
+					{
+						template_type = "web_url",
+						url = "https://zh.wikipedia.org/wiki/Wiki",
+						title = "Select Criteria",
+						webview_height_ratio = "full",
+						messenger_extensions = true,
+						fallback_url = "https://petersfancyapparel.com/fallback"
 					}
 				}
 			});
