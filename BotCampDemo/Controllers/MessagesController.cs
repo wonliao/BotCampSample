@@ -237,7 +237,7 @@ namespace BotCampDemo
 							new
 							{
 								type = "web_url",
-								url = "https://go2gether-e78d4.firebaseapp.com",
+								url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=%E6%96%B0%E5%8C%97%E5%B8%82%E4%B8%89%E9%87%8D%E5%8D%80%E6%B0%B8%E7%A6%8F%E8%A1%97135%E5%B7%B725%E8%99%9F",
 								title = "打開網頁",
 								webview_height_ratio = "compact"
 							}
