@@ -237,8 +237,8 @@ namespace BotCampDemo
 							new
 							{
 								type = "web_url",
-								url = "http://52.197.124.196/luis/index.php",
-								title = "開始訂車",
+								url = "https://go2gether-e78d4.firebaseapp.com",
+								title = "打開網頁",
 								webview_height_ratio = "compact"
 							}
 						}
