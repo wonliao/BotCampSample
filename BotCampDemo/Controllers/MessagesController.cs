@@ -237,7 +237,7 @@ namespace BotCampDemo
 							new
 							{
 								type = "web_url",
-								url = "http://52.197.124.196/luis/index.php?car_type=1&address=新北市三重區永福街135巷25號",
+								url = "http://52.197.124.196/luis/index.php",
 								title = "開始訂車",
 								webview_height_ratio = "compact"
 							}
