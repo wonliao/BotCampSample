@@ -72,9 +72,9 @@ namespace BotCampDemo
 							{
                                 if (result.TopScoringIntent.Name == "找車") {
 
-                                    var _str = result.TopScoringIntent.Name;
-                                    reply.Text = $"won test 1 ==> {_str}";
-
+                                    //var _str = result.TopScoringIntent.Name;
+                                    //reply.Text = $"won test 1 ==> {_str}";
+                                    TemplateByWebURL(reply);
 
                                 } else {
                                  
