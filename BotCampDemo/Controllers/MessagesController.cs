@@ -83,14 +83,8 @@ namespace BotCampDemo
                                 else 
                                 {
 									//TemplateByChannelData(reply);
-									//TemplateByAirlineCheckin(reply);
+									TemplateByAirlineCheckin(reply);
 
-									reply.Attachments.Add(new Attachment()
-									{
-										ContentUrl = "https://zh.wikipedia.org/zh-tw/Wiki",
-										ContentType = "text/html",
-										Name = "wiki"
-									});
 								}
 							}
 							else
