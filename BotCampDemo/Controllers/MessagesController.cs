@@ -52,11 +52,8 @@ namespace BotCampDemo
 
 							foreach (var face in result)
 							{
-
 								reply.Text += face.FaceAttributes.Gender + "（" + face.FaceAttributes.Age + "） ";
-
 							}
-
 						}
 						else if (fbData.postback.payload.StartsWith("Analyze>"))
 						{
@@ -85,8 +82,15 @@ namespace BotCampDemo
                                 } 
                                 else 
                                 {
-                                    //TemplateByChannelData(reply);
-                                    TemplateByAirlineCheckin(reply);
+									//TemplateByChannelData(reply);
+									//TemplateByAirlineCheckin(reply);
+
+									reply.Attachments.Add(new Attachment()
+									{
+										ContentUrl = "https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png",
+										ContentType = "image/png",
+										Name = "Bender_Rodriguez.png"
+									});
 								}
 							}
 							else
