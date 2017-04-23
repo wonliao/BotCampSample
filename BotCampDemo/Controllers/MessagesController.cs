@@ -87,9 +87,9 @@ namespace BotCampDemo
 
 									reply.Attachments.Add(new Attachment()
 									{
-										ContentUrl = "https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png",
-										ContentType = "image/png",
-										Name = "Bender_Rodriguez.png"
+										ContentUrl = "https://zh.wikipedia.org/zh-tw/Wiki",
+										ContentType = "text/html",
+										Name = "wiki"
 									});
 								}
 							}
