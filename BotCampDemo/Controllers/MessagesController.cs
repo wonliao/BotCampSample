@@ -212,19 +212,15 @@ namespace BotCampDemo
 					payload = new
 					{
 						template_type = "button",
-						text = "What do you want to do next?",
+						text = "55688訂車",
 						buttons = new List<object>()
 						{
 							new
 							{
 								type = "web_url",
 								url = "https://go2gether-e78d4.firebaseapp.com",
-								title = "Select Criteria",
-								webview_height_ratio = "tall"
-								//messenger_extensions = true,
-								//fallback_url = "https://go2gether-e78d4.firebaseapp.com"
-
-
+								title = "打開網頁",
+								webview_height_ratio = "compact"
 							}
 						}
 					}
