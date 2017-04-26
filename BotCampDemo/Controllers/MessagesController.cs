@@ -115,6 +115,12 @@ namespace BotCampDemo
 															url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=" + address,
 															title = "請問你是否要在『" + address + "』上車？",
 															webview_height_ratio = "compact"
+														},
+														new
+														{
+															type = "postback",
+															title = "Start Chatting",
+			                                                payload = "USER_DEFINED_PAYLOAD"
 														}
 													}
 												}
