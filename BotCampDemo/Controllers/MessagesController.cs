@@ -113,7 +113,7 @@ namespace BotCampDemo
 														{
 															type = "web_url",
 															url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=" + address,
-															title = "請問你是否要在\"" + address + "\"上車？",
+															title = "請問你是否要在『" + address + "』上車？",
 															webview_height_ratio = "compact"
 														}
 													}
