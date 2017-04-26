@@ -91,7 +91,7 @@ namespace BotCampDemo
 												var webClient = new WebClient();
                                                 var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
 												string result2 = webClient.DownloadString(url);
-                                                address = result2;
+                                                address = System.Net.WebUtility.HtmlDecode(result2);
                                             }
 										}
 
