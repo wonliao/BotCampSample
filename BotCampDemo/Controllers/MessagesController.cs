@@ -89,7 +89,8 @@ namespace BotCampDemo
                                                 address = entity.Value.Replace(" ", "");
 
 												var webClient = new WebClient();
-                                                var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
+												client.Encoding = Encoding.UTF8;
+												var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
 												string result2 = webClient.DownloadString(url);
                                                 address = System.Net.WebUtility.HtmlDecode(result2);
                                             }
