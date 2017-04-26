@@ -72,41 +72,48 @@ namespace BotCampDemo
 							{
                                 if (result.TopScoringIntent.Name == "找車") 
                                 {
-
-                                    //reply.Text = $"size => {result.Entities.Count()}";
-
-
                                     if(result.Entities.Count() > 0 ) 
                                     {
-                                        //var car = "";
-                                        //var address = "";
+                                        var car = "";
+                                        var address = "";
 
                                         var entities = result.GetAllEntities();
-
-
                                         foreach (Microsoft.Cognitive.LUIS.Entity entity in entities)
 										{
                                             if( entity.Name == "車型::計程車") 
                                             {
-                                                var car = entity.Value;
-
-                                                reply.Text += car;
+                                                car = entity.Value;
                                             }
                                             else if (entity.Name == "地點")
                                             {
-                                                var address = entity.Value;
+                                                address = entity.Value.Replace(" ", "");
 
-                                                reply.Text += address;
+												var webClient = new WebClient();
+                                                var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
+												string result2 = webClient.DownloadString(url);
+                                                address = result2;
                                             }
-
-
-
-
-
-
 										}
 
-                                    }
+                                        //reply.Text = "請問你是否要在\"" + address + "\"上車？";
+
+
+										List<Attachment> att = new List<Attachment>();
+                                        att.Add(new HeroCard()
+                                        {
+											Title = "呼叫計程車",
+											Subtitle = "請問你是否要在\"" + address + "\"上車？",
+											//Images = new List<CardImage>() { new CardImage(url) },
+											Buttons = new List<CardAction>()
+											{
+												new CardAction(ActionTypes.PostBack, "是", value: $"Yes>{activity.Attachments.First().ContentUrl}"),
+												new CardAction(ActionTypes.PostBack, "否", value: $"No>{activity.Attachments.First().ContentUrl}")
+											}
+										}.ToAttachment());
+
+										reply.Attachments = att;
+
+									}
 
 
 
@@ -118,7 +125,7 @@ namespace BotCampDemo
 
                                 } else {
                                  
-                                    reply.Text = "won test 2";
+                                    reply.Text = "看不懂";
                                 }
 
 
