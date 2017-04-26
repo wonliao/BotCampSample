@@ -95,23 +95,31 @@ namespace BotCampDemo
                                             }
 										}
 
-                                        //reply.Text = "請問你是否要在\"" + address + "\"上車？";
+										//reply.Text = "請問你是否要在\"" + address + "\"上車？";
 
 
-										List<Attachment> att = new List<Attachment>();
-                                        att.Add(new HeroCard()
-                                        {
-											Title = "呼叫計程車",
-											Subtitle = "請問你是否要在\"" + address + "\"上車？",
-											//Images = new List<CardImage>() { new CardImage(url) },
-											Buttons = new List<CardAction>()
+										reply.ChannelData = JObject.FromObject(new
+										{
+											attachment = new
 											{
-												new CardAction(ActionTypes.PostBack, "是", value: $"Yes>{activity.Attachments.First().ContentUrl}"),
-												new CardAction(ActionTypes.PostBack, "否", value: $"No>{activity.Attachments.First().ContentUrl}")
+												type = "template",
+												payload = new
+												{
+													template_type = "button",
+													text = "55688訂車",
+													buttons = new List<object>()
+													{
+														new
+														{
+															type = "web_url",
+															url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=" + address,
+															title = "請問你是否要在\"" + address + "\"上車？",
+															webview_height_ratio = "compact"
+														}
+													}
+												}
 											}
-										}.ToAttachment());
-
-										reply.Attachments = att;
+										});
 
 									}
 
