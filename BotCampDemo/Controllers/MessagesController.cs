@@ -106,20 +106,20 @@ namespace BotCampDemo
 												payload = new
 												{
 													template_type = "button",
-													text = "55688訂車",
+                                                    text = "請問你是否要在『" + address + "』上車？",
 													buttons = new List<object>()
 													{
 														new
 														{
 															type = "web_url",
 															url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=" + address,
-															title = "請問你是否要在『" + address + "』上車？",
+															title = "Yes",
 															webview_height_ratio = "compact"
 														},
 														new
 														{
 															type = "postback",
-															title = "Start Chatting",
+															title = "No",
 			                                                payload = "USER_DEFINED_PAYLOAD"
 														}
 													}
