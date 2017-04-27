@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -88,11 +89,15 @@ namespace BotCampDemo
                                             {
                                                 address = entity.Value.Replace(" ", "");
 
-												var webClient = new WebClient();
-												client.Encoding = Encoding.UTF8;
-												var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
-												string result2 = webClient.DownloadString(url);
-                                                address = System.Net.WebUtility.HtmlDecode(result2);
+                                                using (WebClient webClient = new WebClient())
+                                                {
+                                                    //webClient.Encoding = Encoding.UTF8;
+                                                    var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
+
+                                                    string s = webClient.DownloadString(url);
+													address = Encoding.UTF8.GetString(Encoding.Default.GetBytes(s));
+
+                                                }
                                             }
 										}
 
