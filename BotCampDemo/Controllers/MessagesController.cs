@@ -129,16 +129,7 @@ namespace BotCampDemo
 												}
 											}
 										});
-
 									}
-
-
-
-
-
-                                    //var _str = result.TopScoringIntent.Name;
-                                    //reply.Text = $"won test 1 ==> {_str}";
-                                    //TemplateByWebURL(reply);
 
                                 } else {
                                  
