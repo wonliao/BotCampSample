@@ -91,11 +91,11 @@ namespace BotCampDemo
 
                                                 using (WebClient webClient = new WebClient())
                                                 {
-                                                    //webClient.Encoding = Encoding.UTF8;
+                                                    webClient.Encoding = Encoding.UTF8;
                                                     var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
 
-                                                    string s = webClient.DownloadString(url);
-													address = Encoding.UTF8.GetString(Encoding.Default.GetBytes(s));
+                                                    address = webClient.DownloadString(url);
+													//address = Encoding.UTF8.GetString(Encoding.Default.GetBytes(s));
 
                                                 }
                                             }
