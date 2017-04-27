@@ -75,7 +75,7 @@ namespace BotCampDemo
                                 {
                                     if(result.Entities.Count() > 0 ) 
                                     {
-                                        var car = "";
+                                        var car_type = "";
                                         var address = "";
 
                                         var entities = result.GetAllEntities();
@@ -83,8 +83,20 @@ namespace BotCampDemo
 										{
                                             if( entity.Name == "車型::計程車") 
                                             {
-                                                car = entity.Value;
+                                                car_type = "0";
                                             }
+											else if (entity.Name == "車型::舒適型")
+											{
+												car_type = "1";
+											}
+											else if (entity.Name == "車型::豪華型")
+											{
+												car_type = "2";
+											}
+											else if (entity.Name == "車型::九人座")
+											{
+                                                car_type = "3";
+											}
                                             else if (entity.Name == "地點")
                                             {
                                                 address = entity.Value.Replace(" ", "");
@@ -97,9 +109,6 @@ namespace BotCampDemo
                                                 }
                                             }
 										}
-
-										//reply.Text = "請問你是否要在\"" + address + "\"上車？";
-
 
 										reply.ChannelData = JObject.FromObject(new
 										{
@@ -115,7 +124,7 @@ namespace BotCampDemo
 														new
 														{
 															type = "web_url",
-															url = "https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type=1&address=" + address,
+															url = "https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type="+car_type+"&address=" + address,
 															title = "Yes",
 															webview_height_ratio = "compact"
 														},
