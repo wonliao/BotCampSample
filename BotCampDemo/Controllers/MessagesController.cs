@@ -116,7 +116,7 @@ namespace BotCampDemo
 														{
 															type = "web_url",
 															//url = "https://17-vr-live.wonliao.com/luis/?car_type=1&address=" + address,
-															url = "http://52.197.124.196/luis/index.php?action=callCar&car_type=1&address=" + address;
+															url = "http://52.197.124.196/luis/index.php?action=callCar&car_type=1&address=" + address,
 															title = "Yes",
 															webview_height_ratio = "compact"
 														},
