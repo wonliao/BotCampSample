@@ -437,8 +437,8 @@ namespace BotCampDemo
                 Subtitle = "請問你是否要在\""+address+"\"上車嗎?",
                 Buttons = new List<CardAction>()
                 {
-                    new CardAction(ActionTypes.PostBack, "是", value: $"Adddress>Yes"),
-                    new CardAction(ActionTypes.PostBack, "否", value: $"Adddress>No")
+                    new CardAction(ActionTypes.PostBack, "是", value: $"Address>Yes"),
+                    new CardAction(ActionTypes.PostBack, "否", value: $"Address>No")
                 }
             }.ToAttachment());
 
