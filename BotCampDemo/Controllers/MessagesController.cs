@@ -400,38 +400,38 @@ namespace BotCampDemo
 			List<Attachment> att = new List<Attachment>();
 			att.Add(new HeroCard()
 			{
-				Title = "iPad Pro",
+				Title = "計程車",
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_taxi.png") },
 				Buttons = new List<CardAction>()
 						{
-                    new CardAction(ActionTypes.OpenUrl, "計程車", value: $"Cars>計程車>{address}")
+                    new CardAction(ActionTypes.PostBack, "計程車", value: $"Cars>計程車>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
 			{
-				Title = "Surface Pro",
+				Title = "舒適型",
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_basic.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "舒適型", value: $"Cars>舒適型>{address}")
+							new CardAction(ActionTypes.PostBack, "舒適型", value: $"Cars>舒適型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
 			{
-				Title = "Surface Pro",
+				Title = "豪華型",
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_luxury.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "豪華型", value: $"Cars>豪華型>{address}")
+							new CardAction(ActionTypes.PostBack, "豪華型", value: $"Cars>豪華型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
 			{
-				Title = "Surface Pro",
+				Title = "九人座",
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_commercial.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "九人座", value: $"Cars>九人座>{address}")
+							new CardAction(ActionTypes.PostBack, "九人座", value: $"Cars>九人座>{address}")
 						}
 			}.ToAttachment());
 
