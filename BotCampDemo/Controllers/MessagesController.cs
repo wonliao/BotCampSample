@@ -62,7 +62,19 @@ namespace BotCampDemo
 							VisionServiceClient client = new VisionServiceClient("5092ac9edbb1474ebc4c209d551036ce");
 							var result = await client.AnalyzeImageAsync(url, new VisualFeature[] { VisualFeature.Description });
 							reply.Text = result.Description.Captions.First().Text;
-						}
+						} 
+                        else if (fbData.postback.payload.StartsWith("Address>"))
+                        {
+                            var flag = fbData.postback.payload.Split('>')[1];
+                            if(flag == "Yes")
+                            {
+                                reply.Text = "長安東路二段162號叫一台計程車"; 
+                            }
+                            else 
+                            {
+                                reply.Text = "需要叫車服務，請輸入上車地點及車型，<br>例如：\"長安東路二段162號叫一台計程車\"";
+                            }
+                        }
 					}
 					else
 					{
@@ -71,33 +83,51 @@ namespace BotCampDemo
 							var result = await client.Predict(activity.Text);
 							if (result.Intents.Count() > 0)
 							{
-                                if (result.TopScoringIntent.Name == "找車") 
+                                if(result.TopScoringIntent.Name == "welcome")
                                 {
-                                    if(result.Entities.Count() > 0 ) 
+                                    String firstText = "";
+                                    String _hours = DateTime.Now.ToString("HH", System.Globalization.DateTimeFormatInfo.InvariantInfo);
+                                    int hours = Int32.Parse(_hours);
+                                    if(hours > 5 && hours < 12)  
                                     {
-                                        var car_type = "";
+                                        firstText = "早安!";
+                                    }
+                                    else if(hours < 18)
+                                    {
+                                        firstText = "午安!";
+                                    }
+                                    else
+                                    {
+                                        firstText = "晚安!";  
+                                    }
+
+                                    var weather = "";
+                                    using (WebClient webClient = new WebClient())
+                                    {
+                                        webClient.Encoding = Encoding.UTF8;
+                                        var url = "https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20%3D%202306179%20and%20u%3D%22c%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+                                        var data = webClient.DownloadString(url);
+
+                                        JObject obj = JObject.Parse(data);
+                                        weather = obj["query"]["results"]["channel"]["item"]["condition"]["text"].ToString();
+                                    }
+
+                                    reply.Text = firstText + "今天天氣" + weather + "<br>歡迎使用55688 聊天機器人<br>需要協助時，請輸入\"help\"";
+                                }
+                                else if (result.TopScoringIntent.Name == "求助")
+                                {
+                                    reply.Text = "需要叫車服務，請輸入上車地點及車型，<br>例如：\"長安東路二段162號叫一台計程車\"";
+                                }
+                                else if (result.TopScoringIntent.Name == "找地點")
+                                {
+                                    if (result.Entities.Count() > 0)
+                                    {
                                         var address = "";
 
                                         var entities = result.GetAllEntities();
                                         foreach (Microsoft.Cognitive.LUIS.Entity entity in entities)
-										{
-                                            if( entity.Name == "車型::計程車") 
-                                            {
-                                                car_type = "0";
-                                            }
-											else if (entity.Name == "車型::舒適型")
-											{
-												car_type = "1";
-											}
-											else if (entity.Name == "車型::豪華型")
-											{
-												car_type = "2";
-											}
-											else if (entity.Name == "車型::九人座")
-											{
-                                                car_type = "3";
-											}
-                                            else if (entity.Name == "地點")
+                                        {
+                                            if (entity.Name == "地點")
                                             {
                                                 address = entity.Value.Replace(" ", "");
 
@@ -108,42 +138,86 @@ namespace BotCampDemo
                                                     address = webClient.DownloadString(url);
                                                 }
                                             }
-										}
+                                        }
 
-										reply.ChannelData = JObject.FromObject(new
-										{
-											attachment = new
-											{
-												type = "template",
-												payload = new
-												{
-													template_type = "button",
-                                                    text = "請問你是否要在『" + address + "』上車？",
-													buttons = new List<object>()
-													{
-														new
-														{
-															type = "web_url",
-															url = "https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type="+car_type+"&address=" + address,
-															title = "Yes",
-															webview_height_ratio = "compact"
-														},
-														new
-														{
-															type = "postback",
-															title = "No",
-			                                                payload = "USER_DEFINED_PAYLOAD"
-														}
-													}
-												}
-											}
-										});
-									}
-
-                                } else {
-                                 
-                                    reply.Text = "看不懂";
+                                        AddressTemplate(reply, address);
+                                    }
                                 }
+                                else if (result.TopScoringIntent.Name == "找車")
+                                    {
+                                        if (result.Entities.Count() > 0)
+                                        {
+                                            var car_type = "";
+                                            var address = "";
+
+                                            var entities = result.GetAllEntities();
+                                            foreach (Microsoft.Cognitive.LUIS.Entity entity in entities)
+                                            {
+                                                if (entity.Name == "車型::計程車")
+                                                {
+                                                    car_type = "0";
+                                                }
+                                                else if (entity.Name == "車型::舒適型")
+                                                {
+                                                    car_type = "1";
+                                                }
+                                                else if (entity.Name == "車型::豪華型")
+                                                {
+                                                    car_type = "2";
+                                                }
+                                                else if (entity.Name == "車型::九人座")
+                                                {
+                                                    car_type = "3";
+                                                }
+                                                else if (entity.Name == "地點")
+                                                {
+                                                    address = entity.Value.Replace(" ", "");
+
+                                                    using (WebClient webClient = new WebClient())
+                                                    {
+                                                        webClient.Encoding = Encoding.UTF8;
+                                                        var url = "http://52.197.124.196/luis/index.php?action=getGoogleAddress&address=" + address;
+                                                        address = webClient.DownloadString(url);
+                                                    }
+                                                }
+                                            }
+
+                                            reply.ChannelData = JObject.FromObject(new
+                                            {
+                                                attachment = new
+                                                {
+                                                    type = "template",
+                                                    payload = new
+                                                    {
+                                                        template_type = "button",
+                                                        text = "請問你是否要在『" + address + "』上車？",
+                                                        buttons = new List<object>()
+                                                    {
+                                                        new
+                                                        {
+                                                            type = "web_url",
+                                                            url = "https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type="+car_type+"&address=" + address,
+                                                            title = "Yes",
+                                                            webview_height_ratio = "compact"
+                                                        },
+                                                        new
+                                                        {
+                                                            type = "postback",
+                                                            title = "No",
+                                                            payload = "USER_DEFINED_PAYLOAD"
+                                                        }
+                                                    }
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                    }
+                                    else
+                                    {
+
+                                        reply.Text = "看不懂";
+                                    }
 
 
                                 /*
@@ -353,6 +427,23 @@ namespace BotCampDemo
 
 			reply.Attachments = att;
 		}
+
+        private void AddressTemplate(Activity reply, String address)
+        {
+            List<Attachment> att = new List<Attachment>();
+            att.Add(new HeroCard()
+            {
+                Title = "上車地點",
+                Subtitle = "請問你是否要在\""+address+"\"上車嗎?",
+                Buttons = new List<CardAction>()
+                {
+                    new CardAction(ActionTypes.PostBack, "是", value: $"Adddress>Yes"),
+                    new CardAction(ActionTypes.PostBack, "否", value: $"Adddress>No")
+                }
+            }.ToAttachment());
+
+            reply.Attachments = att;
+        }
 
 		private Activity HandleSystemMessage(Activity message)
 		{
