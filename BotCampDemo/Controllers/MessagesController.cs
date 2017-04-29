@@ -70,7 +70,6 @@ namespace BotCampDemo
                             {
                                 var address = fbData.postback.payload.Split('>')[2];
                                 TemplateBySDK(reply, address);
-                                //reply.Text = address;
                             }
                             else 
                             {
@@ -149,8 +148,7 @@ namespace BotCampDemo
                                             }
                                         }
 
-                                        TemplateBySDK(reply, address);
-                                        //AddressTemplate(reply, address);
+                                        AddressTemplate(reply, address);
                                     }
                                 }
                                 else if (result.TopScoringIntent.Name == "找車")
@@ -404,7 +402,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_taxi.png") },
 				Buttons = new List<CardAction>()
 						{
-                    new CardAction(ActionTypes.PostBack, "計程車", value: $"Cars>計程車>{address}")
+                            new CardAction(ActionTypes.OpenUrl, "計程車", value: $"https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type=0&address={address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
