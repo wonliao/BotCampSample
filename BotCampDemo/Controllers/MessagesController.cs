@@ -73,7 +73,7 @@ namespace BotCampDemo
                             }
                             else 
                             {
-                                reply.Text = "需要叫車服務，請輸入上車地點及車型，<br>例如：\"長安東路二段162號叫一台計程車\"";
+                                reply.Text = "需要叫車服務，請輸入上車地點及車型，\n\r例如：\"長安東路二段162號叫一台計程車\"";
                             }
                         }
 						else if (fbData.postback.payload.StartsWith("Cars>"))
@@ -153,7 +153,7 @@ namespace BotCampDemo
                                 }
                                 else if (result.TopScoringIntent.Name == "求助")
                                 {
-                                    reply.Text = "需要叫車服務，請輸入上車地點及車型，<br>例如：\"長安東路二段162號叫一台計程車\"";
+                                    reply.Text = "需要叫車服務，請輸入上車地點及車型，\n\r例如：\"長安東路二段162號叫一台計程車\"";
                                 }
                                 else if (result.TopScoringIntent.Name == "找地點")
                                 {
