@@ -149,7 +149,7 @@ namespace BotCampDemo
                                         weather = obj["query"]["results"]["channel"]["item"]["condition"]["text"].ToString();
                                     }
 
-                                    reply.Text = firstText + "今天天氣" + weather + "\n歡迎使用55688 聊天機器人\n需要協助時，請輸入\"help\"";
+                                    reply.Text = firstText + "今天天氣" + weather + "\n\r歡迎使用55688 聊天機器人\n\r需要協助時，請輸入\"help\"";
                                 }
                                 else if (result.TopScoringIntent.Name == "求助")
                                 {
