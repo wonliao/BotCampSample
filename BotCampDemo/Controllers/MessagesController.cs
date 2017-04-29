@@ -149,7 +149,8 @@ namespace BotCampDemo
                                             }
                                         }
 
-                                        AddressTemplate(reply, address);
+                                        TemplateBySDK(reply, address);
+                                        //AddressTemplate(reply, address);
                                     }
                                 }
                                 else if (result.TopScoringIntent.Name == "找車")
