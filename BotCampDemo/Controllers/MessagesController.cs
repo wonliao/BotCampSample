@@ -78,10 +78,39 @@ namespace BotCampDemo
                         }
 						else if (fbData.postback.payload.StartsWith("Cars>"))
 						{
-							var type = fbData.postback.payload.Split('>')[1];
-                            var address = fbData.postback.payload.Split('>')[2];
-							
-							reply.Text = address + "叫一台" + type;
+							var car_type = fbData.postback.payload.Split('>')[1];
+                            var car_name = fbData.postback.payload.Split('>')[2];
+                            var address = fbData.postback.payload.Split('>')[3];
+
+							reply.ChannelData = JObject.FromObject(new
+							{
+								attachment = new
+								{
+									type = "template",
+									payload = new
+									{
+										template_type = "button",
+										text = "請問你是否要在『" + address + "』叫一台"+car_name +"嗎？",
+										buttons = new List<object>()
+													{
+														new
+														{
+															type = "web_url",
+															url = "https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type="+car_type+"&address=" + address,
+															title = "Yes",
+															webview_height_ratio = "compact"
+														},
+														new
+														{
+															type = "postback",
+															title = "No",
+															payload = "USER_DEFINED_PAYLOAD"
+														}
+													}
+									}
+								}
+							});
+
 						}
 					}
 					else
@@ -402,7 +431,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_taxi.png") },
 				Buttons = new List<CardAction>()
 						{
-                            new CardAction(ActionTypes.OpenUrl, "計程車", value: $"https://17-vr-live.wonliao.com/luis/index.php?action=callCar&car_type=0&address={address}")
+                            new CardAction(ActionTypes.PostBack, "計程車", value: $"Cars>0>計程車>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -411,7 +440,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_basic.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.PostBack, "舒適型", value: $"Cars>舒適型>{address}")
+							new CardAction(ActionTypes.PostBack, "舒適型", value: $"Cars>1>舒適型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -420,7 +449,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_luxury.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.PostBack, "豪華型", value: $"Cars>豪華型>{address}")
+							new CardAction(ActionTypes.PostBack, "豪華型", value: $"Cars>2>豪華型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -429,7 +458,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_commercial.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.PostBack, "九人座", value: $"Cars>九人座>{address}")
+							new CardAction(ActionTypes.PostBack, "九人座", value: $"Cars>3>九人座>{address}")
 						}
 			}.ToAttachment());
 
