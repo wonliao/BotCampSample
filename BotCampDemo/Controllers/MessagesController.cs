@@ -69,8 +69,8 @@ namespace BotCampDemo
                             if(flag == "Yes")
                             {
                                 var address = fbData.postback.payload.Split('>')[2];
-                                //TemplateBySDK(reply, address);
-                                reply.Text = address;
+                                TemplateBySDK(reply, address);
+                                //reply.Text = address;
                             }
                             else 
                             {
@@ -403,7 +403,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_taxi.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "計程車", value: $"Cars>計程車>"+address)
+                    new CardAction(ActionTypes.OpenUrl, "計程車", value: $"Cars>計程車>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -412,7 +412,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_basic.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "舒適型", value: $"Cars>舒適型>"+address)
+							new CardAction(ActionTypes.OpenUrl, "舒適型", value: $"Cars>舒適型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -421,7 +421,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_luxury.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "豪華型", value: $"Cars>豪華型>"+address)
+							new CardAction(ActionTypes.OpenUrl, "豪華型", value: $"Cars>豪華型>{address}")
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
@@ -430,7 +430,7 @@ namespace BotCampDemo
 				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_commercial.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "九人座", value: $"Cars>九人座>"+address)
+							new CardAction(ActionTypes.OpenUrl, "九人座", value: $"Cars>九人座>{address}")
 						}
 			}.ToAttachment());
 
