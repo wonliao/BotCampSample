@@ -69,7 +69,8 @@ namespace BotCampDemo
                             if(flag == "Yes")
                             {
                                 var address = fbData.postback.payload.Split('>')[2];
-                                TemplateBySDK(reply, address);
+                                //TemplateBySDK(reply, address);
+                                reply.Text = address;
                             }
                             else 
                             {
