@@ -68,13 +68,21 @@ namespace BotCampDemo
                             var flag = fbData.postback.payload.Split('>')[1];
                             if(flag == "Yes")
                             {
-                                reply.Text = "長安東路二段162號叫一台計程車"; 
+                                var address = fbData.postback.payload.Split('>')[2];
+                                TemplateBySDK(reply, address);
                             }
                             else 
                             {
                                 reply.Text = "需要叫車服務，請輸入上車地點及車型，<br>例如：\"長安東路二段162號叫一台計程車\"";
                             }
                         }
+						else if (fbData.postback.payload.StartsWith("Cars>"))
+						{
+							var type = fbData.postback.payload.Split('>')[1];
+                            var address = fbData.postback.payload.Split('>')[2];
+							
+							reply.Text = address + "叫一台" + type;
+						}
 					}
 					else
 					{
@@ -385,27 +393,47 @@ namespace BotCampDemo
 			});
 		}
 
-		private void TemplateBySDK(Activity reply)
+		private void TemplateBySDK(Activity reply, String address)
 		{
 			List<Attachment> att = new List<Attachment>();
 			att.Add(new HeroCard()
 			{
 				Title = "iPad Pro",
-				Images = new List<CardImage>() { new CardImage("https://s.yimg.com/wb/images/936392DB6B69D9C6D1B897B8DAB20AE595E96FA4") },
+				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_taxi.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "Yahoo購物中心", value: $"https://tw.buy.yahoo.com/gdsale/MM172-6798747.html")
+							new CardAction(ActionTypes.OpenUrl, "計程車", value: $"Cars>計程車>"+address)
 						}
 			}.ToAttachment());
 			att.Add(new HeroCard()
 			{
 				Title = "Surface Pro",
-				Images = new List<CardImage>() { new CardImage("https://s.yimg.com/wb/images/268917ABD27238C9A20428002A8143AEEF40A048") },
+				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_basic.png") },
 				Buttons = new List<CardAction>()
 						{
-							new CardAction(ActionTypes.OpenUrl, "Yahoo購物中心", value: $"https://tw.buy.yahoo.com/gdsale/gdsale.asp?act=gdsearch&gdid=6561885")
+							new CardAction(ActionTypes.OpenUrl, "舒適型", value: $"Cars>舒適型>"+address)
 						}
 			}.ToAttachment());
+			att.Add(new HeroCard()
+			{
+				Title = "Surface Pro",
+				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_luxury.png") },
+				Buttons = new List<CardAction>()
+						{
+							new CardAction(ActionTypes.OpenUrl, "豪華型", value: $"Cars>豪華型>"+address)
+						}
+			}.ToAttachment());
+			att.Add(new HeroCard()
+			{
+				Title = "Surface Pro",
+				Images = new List<CardImage>() { new CardImage("https://17-vr-live.wonliao.com/luis/images/order_type_commercial.png") },
+				Buttons = new List<CardAction>()
+						{
+							new CardAction(ActionTypes.OpenUrl, "九人座", value: $"Cars>九人座>"+address)
+						}
+			}.ToAttachment());
+
+
 			reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
 			reply.Attachments = att;
 		}
@@ -437,7 +465,7 @@ namespace BotCampDemo
                 Subtitle = "請問你是否要在\""+address+"\"上車嗎?",
                 Buttons = new List<CardAction>()
                 {
-                    new CardAction(ActionTypes.PostBack, "是", value: $"Address>Yes"),
+                    new CardAction(ActionTypes.PostBack, "是", value: $"Address>Yes>{address}"),
                     new CardAction(ActionTypes.PostBack, "否", value: $"Address>No")
                 }
             }.ToAttachment());
