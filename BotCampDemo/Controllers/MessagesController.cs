@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BotCampDemo.Model;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Cognitive.LUIS;
 using Microsoft.ProjectOxford.Face;
@@ -29,11 +30,13 @@ namespace BotCampDemo
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
+                /*
 				Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
 				ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 				Activity reply = activity.CreateReply();
 				//reply.Text = "看不懂";
 
+				
 				if (activity.Attachments?.Count > 0 && activity.Attachments.First().ContentType.StartsWith("image"))
 				{
 					ImageTemplate(reply, activity.Attachments.First().ContentUrl);
@@ -255,31 +258,6 @@ namespace BotCampDemo
 
                                         reply.Text = "看不懂";
                                     }
-
-
-                                /*
-								if (result.TopScoringIntent.Name == "查匯率")
-								{
-									var currency = result.Entities?.Where(x => x.Key.StartsWith("幣別"))?.First().Value[0].Value;
-									// ask api
-									reply.Text = $"{currency}價格是30.0";
-								}
-								else if (result.TopScoringIntent.Name == "找車")
-								{
-									reply.Text = "請問你的上車地點?";
-                                }
-								else if (result.TopScoringIntent.Name == "找地點")
-								{
-                                    var address = result.Entities.First().Value[0].Value;
-									reply.Text = $"你的上車地點是{address}";
-								}
-                                else 
-                                {
-                                    //TemplateByChannelData(reply);
-                                    //TemplateByAirlineCheckin(reply);
-                                    TemplateByWebURL(reply);
-								}
-								*/
 							}
 							else
 							{
@@ -292,6 +270,9 @@ namespace BotCampDemo
 
 
 				await connector.Conversations.ReplyToActivityAsync(reply);
+                */
+
+				await Conversation.SendAsync(activity, () => new SimpleQnABot.Dialogs.SimpleQnADialog());
 			}
 			else
 			{
