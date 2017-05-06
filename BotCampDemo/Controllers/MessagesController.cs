@@ -30,7 +30,7 @@ namespace BotCampDemo
 		{
 			if (activity.Type == ActivityTypes.Message)
 			{
-                /*
+
 				Trace.TraceInformation(JsonConvert.SerializeObject(activity, Formatting.Indented));
 				ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 				Activity reply = activity.CreateReply();
@@ -270,9 +270,9 @@ namespace BotCampDemo
 
 
 				await connector.Conversations.ReplyToActivityAsync(reply);
-                */
 
-				await Conversation.SendAsync(activity, () => new SimpleQnABot.Dialogs.SimpleQnADialog());
+
+				//await Conversation.SendAsync(activity, () => new SimpleQnABot.Dialogs.SimpleQnADialog());
 			}
 			else
 			{
